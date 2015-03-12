@@ -1,0 +1,3 @@
+title="MyEntity - ZoeFX App"
+searchcolumns=description
+searchcriteria=id,description

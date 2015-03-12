@@ -1,0 +1,15 @@
+package controllers;
+
+import com.axiastudio.zoefx.core.controller.Controller;
+import java.net.URL;
+import java.util.*;
+
+
+public class MyEntityController extends Controller {
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+}

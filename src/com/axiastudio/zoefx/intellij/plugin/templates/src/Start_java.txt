@@ -1,0 +1,44 @@
+import com.axiastudio.zoefx.core.Utilities;
+import com.axiastudio.zoefx.core.controller.Controller;
+import com.axiastudio.zoefx.core.db.*;
+import com.axiastudio.zoefx.core.model.beans.EntityBuilder;
+import com.axiastudio.zoefx.core.skins.*;
+import com.axiastudio.zoefx.core.view.ZSceneBuilder;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+import entities.MyEntity;
+import controllers.MyEntityController;
+
+public class Start extends Application {
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        ZSkin skin = new FamFamFam();
+        Skins.registerSkin(skin);
+
+        NoPersistenceDatabaseImpl database = new NoPersistenceDatabaseImpl();
+        Utilities.registerUtility(database, Database.class);
+        Manager<MyEntity> manager = database.createManager(MyEntity.class);
+
+        manager.save(EntityBuilder.create(MyEntity.class).set("id", 1L)
+                .set("description", "1st entity").build());
+        manager.save(EntityBuilder.create(MyEntity.class).set("id", 2L)
+                .set("description", "2nd entity").build());
+
+        primaryStage.setScene(ZSceneBuilder.create()
+                .url(Start.class.getResource("/views/myentity.fxml"))
+                .controller(new MyEntityController())
+                .manager(database.createManager(MyEntity.class))
+                .properties(Start.class.getResource("/properties/myentity.properties"))
+                .build());
+        primaryStage.setTitle("Zoe FX Framework - My Application");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args){
+        Application.launch(Start.class, args);
+    }
+}

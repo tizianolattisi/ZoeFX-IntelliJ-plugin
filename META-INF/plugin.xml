@@ -1,17 +1,15 @@
 <idea-plugin version="2">
   <id>com.yourcompany.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <name>ZoeFX Application</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="info@axiastudio.com" url="http://www.axiastudio.com">AXIA Studio</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      ZoeFX Application builder.
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      ...
     ]]>
   </change-notes>
 
@@ -26,6 +24,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+      <moduleBuilder builderClass="com.axiastudio.zoefx.intellij.plugin.ZoeFXModuleBuilder"/>
   </extensions>
 
   <application-components>

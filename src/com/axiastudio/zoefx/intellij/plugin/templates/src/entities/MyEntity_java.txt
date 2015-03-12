@@ -1,0 +1,6 @@
+package entities;
+
+public class MyEntity {
+    public Long id;
+    public String description;
+}
