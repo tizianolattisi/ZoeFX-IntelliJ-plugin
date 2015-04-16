@@ -17,6 +17,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -33,7 +34,7 @@ import java.util.Map;
  */
 public class ZoeFXModuleBuilder extends ModuleBuilder implements SourcePathsBuilder {
 
-    private static final String TEMPLATES_PATH = "/com/axiastudio/zoefx/intellij/plugin/templates/";
+    private static final String TEMPLATES_PATH = "/templates/";
 
     @Override
     public void setupRootModel(ModifiableRootModel modifiableRootModel) throws ConfigurationException {
@@ -54,7 +55,8 @@ public class ZoeFXModuleBuilder extends ModuleBuilder implements SourcePathsBuil
             Map<String, String> map = new HashMap<>();
             map.put("groupId", "com.yourdomain");
             map.put("artifactId", "myapp");
-            VFUtil.createFile(baseDir, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "pom_xml.txt"), "pom.xml", map);
+            VFUtil.createFile(baseDir, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "pom_xml.txt"), "pom.xml", map);
+            InputStream resourceAsStream = ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "pom_xml.txt");
 
             // folders
             VirtualFile src = VFUtil.createFolder(baseDir, "src");
@@ -65,19 +67,19 @@ public class ZoeFXModuleBuilder extends ModuleBuilder implements SourcePathsBuil
             VirtualFile properties = VFUtil.createFolder(src, "properties");
 
             // Start.java
-            VFUtil.createFile(src, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "src/Start_java.txt"), "Start.java");
+            VFUtil.createFile(src, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "src/Start_java.txt"), "Start.java");
 
             // MyEntity.java
-            VFUtil.createFile(entities, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "src/entities/MyEntity_java.txt"), "MyEntity.java");
+            VFUtil.createFile(entities, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "src/entities/MyEntity_java.txt"), "MyEntity.java");
 
             // myentity.fxml
-            VFUtil.createFile(views, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "src/views/myentity_fxml.txt"), "myentity.fxml");
+            VFUtil.createFile(views, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "src/views/myentity_fxml.txt"), "myentity.fxml");
 
             // MyEntityController.java
-            VFUtil.createFile(controllers, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "src/controllers/MyEntityController_java.txt"), "MyEntityController.java");
+            VFUtil.createFile(controllers, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "src/controllers/MyEntityController_java.txt"), "MyEntityController.java");
 
             // myentity.properties
-            VFUtil.createFile(properties, ZoeFXModuleBuilder.class.getResource(TEMPLATES_PATH + "src/properties/myentity_properties.txt"), "myentity.properties");
+            VFUtil.createFile(properties, ZoeFXModuleBuilder.class.getResourceAsStream(TEMPLATES_PATH + "src/properties/myentity_properties.txt"), "myentity.properties");
 
         } catch (IOException e) {
             e.printStackTrace();

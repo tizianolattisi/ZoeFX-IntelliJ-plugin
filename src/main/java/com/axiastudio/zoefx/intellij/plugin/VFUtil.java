@@ -6,12 +6,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * User: tiziano
@@ -20,14 +22,14 @@ import java.util.Map;
  */
 public class VFUtil {
 
-    public static VirtualFile createFile(VirtualFile dir, URL url, String name) throws IOException, URISyntaxException {
-        return createFile(dir, url, name, null);
+    public static VirtualFile createFile(VirtualFile dir, InputStream inputStream, String name) throws IOException, URISyntaxException {
+        return createFile(dir, inputStream, name, null);
     }
 
-    public static VirtualFile createFile(VirtualFile folder, URL url, String fileName, Map<String, String> map) throws IOException, URISyntaxException {
+    public static VirtualFile createFile(VirtualFile folder, InputStream in, String fileName, Map<String, String> map) throws IOException, URISyntaxException {
         VirtualFile file = folder.createChildData(ZoeFXModuleBuilder.class, fileName);
         OutputStream outputStream = file.getOutputStream(ZoeFXModuleBuilder.class);
-        String content = new String(Files.readAllBytes(Paths.get(url.toURI())));
+        String content = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
         if( map != null ){
             MessageMapFormat mmp = new MessageMapFormat(content);
             content = mmp.format(map);
