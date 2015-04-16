@@ -1,9 +1,10 @@
-import com.axiastudio.zoefx.core.Utilities;
-import com.axiastudio.zoefx.core.controller.Controller;
+import com.axiastudio.zoefx.core.IOC;
+import com.axiastudio.zoefx.core.beans.EntityBuilder;
+import com.axiastudio.zoefx.desktop.controller.Controller;
 import com.axiastudio.zoefx.core.db.*;
-import com.axiastudio.zoefx.core.model.beans.EntityBuilder;
-import com.axiastudio.zoefx.core.skins.*;
-import com.axiastudio.zoefx.core.view.ZSceneBuilder;
+import com.axiastudio.zoefx.desktop.db.NoPersistenceDatabaseImpl;
+import com.axiastudio.zoefx.desktop.skins.*;
+import com.axiastudio.zoefx.desktop.view.ZSceneBuilder;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ public class Start extends Application {
         Skins.registerSkin(skin);
 
         NoPersistenceDatabaseImpl database = new NoPersistenceDatabaseImpl();
-        Utilities.registerUtility(database, Database.class);
+        IOC.registerUtility(database, Database.class);
         Manager<MyEntity> manager = database.createManager(MyEntity.class);
 
         manager.save(EntityBuilder.create(MyEntity.class).set("id", 1L)

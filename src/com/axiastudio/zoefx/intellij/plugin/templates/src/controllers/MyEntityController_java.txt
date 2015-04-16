@@ -1,6 +1,6 @@
 package controllers;
 
-import com.axiastudio.zoefx.core.controller.Controller;
+import com.axiastudio.zoefx.desktop.controller.Controller;
 import java.net.URL;
 import java.util.*;
 
